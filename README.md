@@ -1,4 +1,4 @@
-# Rivas-APP
+# Rivas-App
 
 ## A simple projectfor lottoland code challenge.
 

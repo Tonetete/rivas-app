@@ -13,6 +13,11 @@
     "test:verbose": "jest --coverage=false --detectOpenHandles",
     "test:coverage": "jest --silent --coverage=true --detectOpenHandles"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:coverage"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -28,6 +33,7 @@
     "css-loader": "^5.0.0",
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.5.0",
+    "husky": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.0",
     "mini-css-extract-plugin": "^1.1.2",
