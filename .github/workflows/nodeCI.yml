@@ -40,5 +40,10 @@ jobs:
       - name: Test
         run: npm run test:coverage
 
+      - name: Setup GIT
+        run: |
+          git config user.email ${{ secrets.EMAIL }}
+          git config user.name ${{ secrets.USERNAME }}
+
       - name: Deploy
         run: npm run deploy
