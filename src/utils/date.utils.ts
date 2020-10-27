@@ -1,7 +1,13 @@
 const numberDaysPerWeek = 7;
-const fridayNumberDay = 5;
 
-type WeekDayType = "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY";
+type WeekDayType =
+  | "MONDAY"
+  | "TUESDAY"
+  | "WEDNESDAY"
+  | "THURSDAY"
+  | "FRIDAY"
+  | "SATURDAY"
+  | "SUNDAY";
 
 export interface FormattedOptionProp {
   value: string;
@@ -27,7 +33,7 @@ export const formatDate = (date: Date): FormattedOptionProp => {
   return { display: displayDate, value: valueDate };
 };
 
-const getNumberWeekDay = (day: string) => {
+const getNumberWeekDay = (day: string): number => {
   switch (day) {
     case "MONDAY":
       return 1;
@@ -42,34 +48,42 @@ const getNumberWeekDay = (day: string) => {
     case "SATURDAY":
       return 6;
     case "SUNDAY":
-      return 0;
+      return 7;
   }
 };
+
+const getFirstDayOfTheWeek = (date) => date.getDate() - date.getDay();
 
 export const getWeekDaysDates = ({
   numberOfWeeksUntilCurrentDate,
   weekDay,
 }: WeekDayDateProp): Date[] => {
-  const currentDate = new Date();
+  const currentDate = new Date(Date.now());
   currentDate.setDate(currentDate.getDate());
-  const currentDayOfTheWeek = currentDate.getDay();
-  const dates = [];
-  if (currentDayOfTheWeek - fridayNumberDay === 0) {
-    dates.push(currentDate);
-  }
+  const currentDayOfTheWeek =
+    currentDate.getDay() % numberDaysPerWeek === 0
+      ? numberDaysPerWeek
+      : currentDate.getDay();
 
-  const intervalOfDaysBetweenCurrentAndFriday =
-    currentDayOfTheWeek === 0
-      ? 2
-      : currentDayOfTheWeek - getNumberWeekDay(weekDay.toUpperCase());
+  const numberWeekDay = getNumberWeekDay(weekDay.toUpperCase());
+  const intervalDays = currentDayOfTheWeek - numberWeekDay;
+  const dates = [];
+
+  if (intervalDays >= 0) {
+    const date = new Date(currentDate);
+    date.setDate(currentDate.getDate() - intervalDays);
+    dates.push(date);
+  }
 
   for (let index = 1; index <= numberOfWeeksUntilCurrentDate; index++) {
     const date = new Date();
-    date.setDate(date.getDate());
     date.setDate(
-      date.getDate() -
-        numberDaysPerWeek * index -
-        intervalOfDaysBetweenCurrentAndFriday
+      intervalDays >= 0
+        ? currentDate.getDate() - numberDaysPerWeek
+        : currentDate.getDate()
+    );
+    date.setDate(
+      getFirstDayOfTheWeek(date) - numberDaysPerWeek * index + numberWeekDay
     );
     dates.push(date);
   }

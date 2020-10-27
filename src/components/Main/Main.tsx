@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dropdown, Option } from "rivas-lib/lib";
-import { formatDate, getWeekDaysDates } from "../utils/functions";
-import { get } from "../services/api";
+import { formatDate, getWeekDaysDates } from "../../utils/date.utils";
+import { get } from "../../services/api";
 
 const param = {
   numberOfWeeksUntilCurrentDate: 10,
@@ -10,7 +10,7 @@ const param = {
 
 const Table = React.lazy(() => import("rivas-lib/lib/components/Table"));
 
-const Content = () => {
+const Main = () => {
   const { useEffect, useState, Suspense } = React;
   const [value, setValue] = useState(null);
   const [content, setContent] = useState(null);
@@ -49,4 +49,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Main;
