@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "plugins": ["react", "import", "prettier"],
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+    "no-console": false,
+    "no-empty": false,
+    "no-empty-interface": false,
+    "no-string-literal": false
+  },
+  "rulesDirectory": []
+}
