@@ -1,6 +1,9 @@
 import { EndpointType } from "@/types";
 import { parser } from "../parser/parserData";
 
+const proxyRequestToEnableCORS = (url) =>
+  `https://cors-anywhere.herokuapp.com/${url}`;
+
 const builApiURL = (section: EndpointType) =>
   `https://www.lottoland.com/api/drawings/${section}/`;
 
@@ -14,6 +17,6 @@ export const get = async ({
   query: string;
   section: EndpointType;
 }): Promise<any> =>
-  await fetch(setUrl(query, section))
+  await fetch(proxyRequestToEnableCORS(setUrl(query, section)))
     .then((result) => result.json().then((res) => parser(res, section)))
     .catch((err) => console.error(err));
