@@ -6,6 +6,10 @@ This project uses [rivas-lib](https://github.com/Tonetete/rivas-lib) library com
 
 The product version deployed can be found at [GitHub Pages](https://tonetete.github.io/rivas-app/)
 
+## Requirements.
+
+NodeJS 12.x previously installed.
+
 ## How to run in local.
 
 ```sh
