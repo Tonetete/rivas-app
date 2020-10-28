@@ -45,6 +45,9 @@ jobs:
           git config user.email ${{ secrets.EMAIL }}
           git config user.name ${{ secrets.USERNAME }}
 
+      - name: Build
+        run: npm run build
+
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
         with:
